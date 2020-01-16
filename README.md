@@ -23,7 +23,7 @@ end
 `RowBinary.encode/2` can be used to encode Elixir data into ClickHouse RowBinary-encoded binaries. Additionally, a protocol spec `RowBinary.RowBinaryEncoding` is included to help with implementing encoders for structs or maps.
 
 ### Examples:
-
+```elixir
     iex> RowBinary.encode(17, [:int8])
     <<17>>
 
@@ -38,7 +38,7 @@ end
 
     iex> RowBinary.encode(1337, [:int8]) # 1137 is out of range for 8 bit integers
     ** (ArgumentError) value=1337 with wrong types=[:int8]
-
+```
 `RowBinary.encode/2` takes a value that should be encoded and a type definition. See `RowBinary.encode/2` for information about supported types.
 
 ## Limitations
