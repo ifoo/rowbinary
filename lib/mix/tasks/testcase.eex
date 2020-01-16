@@ -1,0 +1,11 @@
+defmodule RowBinaryTestGenerated do
+  use ExUnit.Case
+
+  alias RowBinary.Encode
+
+<%= for {name, {value, types}, expected} <- cases do %>
+  test "<%= name %>" do
+    assert Encode.encode(<%= inspect(value) %>, <%= inspect(types) %>) == <%= inspect(expected) %>
+  end
+<% end %>
+end
