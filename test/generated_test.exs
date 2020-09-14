@@ -3,7 +3,6 @@ defmodule RowBinaryTestGenerated do
 
   alias RowBinary.Encode
 
-
   test "toInt8(16)" do
     assert Encode.encode(16, [:int8]) == <<16>>
   end
@@ -129,7 +128,8 @@ defmodule RowBinaryTestGenerated do
   end
 
   test "toNullable(toString('helloworld'))" do
-    assert Encode.encode("helloworld", [:nullable, :string]) == <<0, 10, 104, 101, 108, 108, 111, 119, 111, 114, 108, 100>>
+    assert Encode.encode("helloworld", [:nullable, :string]) ==
+             <<0, 10, 104, 101, 108, 108, 111, 119, 111, 114, 108, 100>>
   end
 
   test "toNullable(toString(null))" do
@@ -137,11 +137,13 @@ defmodule RowBinaryTestGenerated do
   end
 
   test "toFixedString('helloworld',16)" do
-    assert Encode.encode("helloworld", [:fixedstring, 16]) == <<104, 101, 108, 108, 111, 119, 111, 114, 108, 100, 0, 0, 0, 0, 0, 0>>
+    assert Encode.encode("helloworld", [:fixedstring, 16]) ==
+             <<104, 101, 108, 108, 111, 119, 111, 114, 108, 100, 0, 0, 0, 0, 0, 0>>
   end
 
   test "toNullable(toFixedString('helloworld',16))" do
-    assert Encode.encode("helloworld", [:nullable, :fixedstring, 16]) == <<0, 104, 101, 108, 108, 111, 119, 111, 114, 108, 100, 0, 0, 0, 0, 0, 0>>
+    assert Encode.encode("helloworld", [:nullable, :fixedstring, 16]) ==
+             <<0, 104, 101, 108, 108, 111, 119, 111, 114, 108, 100, 0, 0, 0, 0, 0, 0>>
   end
 
   test "toNullable(toFixedString(null,16))" do
@@ -165,7 +167,8 @@ defmodule RowBinaryTestGenerated do
   end
 
   test "toNullable(toDateTime('2016-06-15 23:00:00'))" do
-    assert Encode.encode(~U[2016-06-15 21:00:00.000000Z], [:nullable, :datetime]) == <<0, 208, 193, 97, 87>>
+    assert Encode.encode(~U[2016-06-15 21:00:00.000000Z], [:nullable, :datetime]) ==
+             <<0, 208, 193, 97, 87>>
   end
 
   test "toNullable(toDateTime(null))" do
@@ -185,11 +188,13 @@ defmodule RowBinaryTestGenerated do
   end
 
   test "toIPv6('2001:0db8:0000:0000:0000:8a2e:0370:7334')" do
-    assert Encode.encode({8193, 3512, 0, 0, 0, 35374, 880, 29492}, [:ipv6]) == <<32, 1, 13, 184, 0, 0, 0, 0, 0, 0, 138, 46, 3, 112, 115, 52>>
+    assert Encode.encode({8193, 3512, 0, 0, 0, 35374, 880, 29492}, [:ipv6]) ==
+             <<32, 1, 13, 184, 0, 0, 0, 0, 0, 0, 138, 46, 3, 112, 115, 52>>
   end
 
   test "toNullable(toIPv6('2001:0db8:0000:0000:0000:8a2e:0370:7334'))" do
-    assert Encode.encode({8193, 3512, 0, 0, 0, 35374, 880, 29492}, [:nullable, :ipv6]) == <<0, 32, 1, 13, 184, 0, 0, 0, 0, 0, 0, 138, 46, 3, 112, 115, 52>>
+    assert Encode.encode({8193, 3512, 0, 0, 0, 35374, 880, 29492}, [:nullable, :ipv6]) ==
+             <<0, 32, 1, 13, 184, 0, 0, 0, 0, 0, 0, 138, 46, 3, 112, 115, 52>>
   end
 
   test "toNullable(toIPv6(null))" do
@@ -197,11 +202,13 @@ defmodule RowBinaryTestGenerated do
   end
 
   test "toUUID('ad6614a6-86ce-4065-8d65-bd0999b24bbf')" do
-    assert Encode.encode("ad6614a6-86ce-4065-8d65-bd0999b24bbf", [:uuid]) == <<101, 64, 206, 134, 166, 20, 102, 173, 191, 75, 178, 153, 9, 189, 101, 141>>
+    assert Encode.encode("ad6614a6-86ce-4065-8d65-bd0999b24bbf", [:uuid]) ==
+             <<101, 64, 206, 134, 166, 20, 102, 173, 191, 75, 178, 153, 9, 189, 101, 141>>
   end
 
   test "toNullable(toUUID('ad6614a6-86ce-4065-8d65-bd0999b24bbf'))" do
-    assert Encode.encode("ad6614a6-86ce-4065-8d65-bd0999b24bbf", [:nullable, :uuid]) == <<0, 101, 64, 206, 134, 166, 20, 102, 173, 191, 75, 178, 153, 9, 189, 101, 141>>
+    assert Encode.encode("ad6614a6-86ce-4065-8d65-bd0999b24bbf", [:nullable, :uuid]) ==
+             <<0, 101, 64, 206, 134, 166, 20, 102, 173, 191, 75, 178, 153, 9, 189, 101, 141>>
   end
 
   test "toNullable(toUUID(null))" do
@@ -239,5 +246,4 @@ defmodule RowBinaryTestGenerated do
   test "CAST([1,null,3], 'Array(Nullable(Int8))')" do
     assert Encode.encode([1, nil, 3], [:array, :nullable, :int8]) == <<3, 0, 1, 1, 0, 3>>
   end
-
 end

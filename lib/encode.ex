@@ -1,4 +1,5 @@
 defmodule RowBinary.Encode do
+  @compile {:bin_opt_info, true}
   use Bitwise
 
   @moduledoc false
@@ -35,6 +36,8 @@ defmodule RowBinary.Encode do
   end
 
   # ARRAYS
+
+  @compile {:inline, [do_encode: 2]}
 
   defp do_encode(value, [:array | rest]) when is_list(value) do
     RowBinary.Helpers.encode_leb128(length(value)) <>
@@ -160,13 +163,9 @@ defmodule RowBinary.Encode do
               f >= @uint16_min and f <= @uint16_max and
               g >= @uint16_min and g <= @uint16_max and
               h >= @uint16_min and h <= @uint16_max do
-    <<a::big-unsigned-size(16)>> <>
-      <<b::big-unsigned-size(16)>> <>
-      <<c::big-unsigned-size(16)>> <>
-      <<d::big-unsigned-size(16)>> <>
-      <<e::big-unsigned-size(16)>> <>
-      <<f::big-unsigned-size(16)>> <>
-      <<g::big-unsigned-size(16)>> <> <<h::big-unsigned-size(16)>>
+    <<a::big-unsigned-size(16), b::big-unsigned-size(16), c::big-unsigned-size(16),
+      d::big-unsigned-size(16), e::big-unsigned-size(16), f::big-unsigned-size(16),
+      g::big-unsigned-size(16), h::big-unsigned-size(16)>>
   end
 
   # UUID

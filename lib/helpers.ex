@@ -3,9 +3,11 @@ defmodule RowBinary.Helpers do
 
   use Bitwise
 
+  @compile {:inline, [encode_leb128: 1]}
   def encode_leb128(v) when v < 128, do: <<v>>
   def encode_leb128(v), do: <<1::1, v::7, encode_leb128(v >>> 7)::binary>>
 
+  @compile {:inline, [to_int: 1]}
   # Hex character to integer.
   defp to_int(c) when ?0 <= c and c <= ?9 do
     c - ?0
@@ -27,6 +29,7 @@ defmodule RowBinary.Helpers do
     [to_int(x) * 16 + to_int(y) | hex_str_to_list(tail)]
   end
 
+  @compile {:inline, [uuid_string_to_hex_pair: 1]}
   def uuid_string_to_hex_pair(<<uuid::binary>>) do
     uuid = String.downcase(uuid)
 
